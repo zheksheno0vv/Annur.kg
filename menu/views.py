@@ -1,22 +1,6 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework import viewsets, generics, permissions, status, serializers
 from .serializers import *
 from .models import *
-
-# from .serializers import VerifyResetCodeSerializer  # Убедись, что путь правильный
-#
-#
-# @api_view(['POST'])
-# def verify_reset_code(request):
-#     serializer = VerifyResetCodeSerializer(data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         return Response({'message': 'Пароль успешно сброшен.'}, status=status.HTTP_200_OK)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
 
 
 
@@ -156,7 +140,7 @@ class ContactDetailAPIView(generics.RetrieveAPIView):
     serializer_class = ContactDetailSerializers
 
 
-class OContactCreateAPIView(generics.ListCreateAPIView):
+class ContactCreateAPIView(generics.ListCreateAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactListSerializers
 
@@ -164,5 +148,21 @@ class ContactRetrieveAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactDetailSerializers
 
+class ProductImageListAPIView(generics.ListAPIView):
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageListSerializers
+
+class ProductImageDetailAPIView(generics.RetrieveAPIView):
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageDetailSerializers
+
+
+class ProductImageCreateAPIView(generics.ListCreateAPIView):
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageListSerializers
+
+class ProductImageRetrieveAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageDetailSerializers
 
 

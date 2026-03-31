@@ -15,10 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_swagger.views import get_swagger_view
+from django.conf.urls.i18n import i18n_patterns
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
@@ -33,7 +33,8 @@ schema_view = get_schema_view(
 )
 
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
+    path('', include('menu.urls')),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

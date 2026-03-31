@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,10 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'menu',
     "phonenumber_field",
-    'rest_framework_swagger',
     'drf_yasg'  ,
     'multiselectfield',
-    'django_rest_passwordreset',
 
 ]
 
@@ -57,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'annur.urls'
@@ -118,9 +118,16 @@ TIME_ZONE = 'Asia/Bishkek'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
-
+LANGUAGES = (
+    ('ru', 'Russian'),
+    ('ky', 'Kyrgyz'),
+)
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
+MODELTRANSLATION_LANGUAGES = ('ru', 'ky')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
@@ -129,10 +136,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'zhekshenovaktan@gmail.com'          # твой Gmail
-EMAIL_HOST_PASSWORD = '14 значный код жаз'

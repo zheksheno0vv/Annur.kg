@@ -1,32 +1,6 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from multiselectfield import MultiSelectField
-from django.dispatch import receiver
-from django.urls import reverse
-from django_rest_passwordreset.signals import reset_password_token_created
-from django.core.mail import send_mail
-
-
-@receiver(reset_password_token_created)
-def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
-    # Укажи свой реальный домен
-    frontend_url = "https://example.com"  # Заменить на адрес твоего сайта или фронтенда
-
-    # Генерация полного URL сброса пароля
-    reset_url = "{}{}?token={}".format(
-        frontend_url,
-        reverse('password_reset:reset-password-request'),  # Django-обработчик, можно заменить
-        reset_password_token.key
-    )
-
-    # Отправка письма
-    send_mail(
-        subject="Password Reset for Some Website",  # Тема
-        message=f"Use the following link to reset your password:\n{reset_url}",  # Текст
-        from_email="noreply@example.com",  # Отправитель
-        recipient_list=[reset_password_token.user.email],  # Получатель
-        fail_silently=False,
-    )
 
 
 class Restoran(models.Model):
@@ -67,15 +41,22 @@ class Subcategory(models.Model):
 
 class Product(models.Model):
     sub_category = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    image = models.ImageField(upload_to='product/')
     product_name = models.CharField(max_length=100)
+    description = models.TextField()
+    # image = models.ImageField(upload_to='product/')
     price = models.PositiveSmallIntegerField()
     gram = models.PositiveSmallIntegerField()
 
     def __str__(self):
         return self.product_name
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_image = models.ImageField(upload_to='product_images/')
+
+
+    def __str__(self):
+        return f'{self.product_image}'
 
 
 class AboutUs(models.Model):
@@ -106,7 +87,7 @@ class OpeningHours(models.Model):
     )
 
     work_day = MultiSelectField(choices=DAY_CHOICES, max_choices=7)
-    data = models.DateTimeField(auto_now=True)
+    data = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
 
     def __str__(self):

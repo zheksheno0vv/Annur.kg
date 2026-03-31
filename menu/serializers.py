@@ -33,13 +33,23 @@ class CategoryDetailSerializers(serializers.ModelSerializer):
 class ProductListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['id', 'product_name', 'description', 'price', 'gram', 'sub_category']
 
 class ProductDetailSerializers(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
 
+
+class ProductImageListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model  = ProductImage
+        fields = '__all__'
+
+class ProductImageDetailSerializers(serializers.ModelSerializer):
+    class Meta:
+        model  = ProductImage
+        fields = '__all__'
 
 
 class SubCategoryDetailSerializers(serializers.ModelSerializer):
