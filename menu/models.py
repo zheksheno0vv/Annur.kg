@@ -66,11 +66,13 @@ class Subcategory(models.Model):
         return self.name
 
 class Product(models.Model):
+    sub_category = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
     image = models.ImageField(upload_to='product/')
     product_name = models.CharField(max_length=100)
     price = models.PositiveSmallIntegerField()
     gram = models.PositiveSmallIntegerField()
-    description = models.TextField()
 
     def __str__(self):
         return self.product_name
