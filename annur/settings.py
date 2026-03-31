@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'drf_yasg'  ,
     'multiselectfield',
+    'django_rest_passwordreset',
 
 ]
 
@@ -126,3 +127,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'zhekshenovaktan@gmail.com'          # твой Gmail
+EMAIL_HOST_PASSWORD = '14 значный код жаз'
