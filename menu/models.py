@@ -1,7 +1,25 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from multiselectfield import MultiSelectField
+# from django.contrib.auth.models import AbstractUser
 
+
+
+class UserProfile(models.Model):
+    username = models.CharField(max_length=127,null=True,blank=True)
+    last_name = models.CharField(max_length=127,null=True,blank=True)
+    first_name = models.CharField(max_length=127,null=True,blank=True)
+    email = models.EmailField(unique=True,null=True,blank=True)
+    phone_number = PhoneNumberField(null=True, blank=True, unique=True)
+    ROLE_CHOICES = (
+        ('admin', 'admin'),
+        ('client', 'client')
+    )
+    user_role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='admin')
+    profile_image = models.ImageField(upload_to='profile_image/', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.username}, {self.user_role}'
 
 class Restoran(models.Model):
     names = models.CharField(max_length=150)

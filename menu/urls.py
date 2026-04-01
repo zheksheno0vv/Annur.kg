@@ -7,6 +7,10 @@ routers =routers.SimpleRouter()
 
 urlpatterns = [
     path('', include(routers.urls)),
+
+    path('user/', UserProfileListAPIView.as_view(), name='user_list'),
+    path('user/<int:pk>/', UserProfileDetailAPIView.as_view(), name='user_detail'),
+
     path('caffe/', RestoranListAPIView.as_view(), name='caffe_list'),
     path('caffe/<int:pk>/', RestoranRetrieveAPIView.as_view(), name='caffe_detail'),
     path('caffe_create/', RestoranCreateAPIView.as_view(), name='caffe_creates'),

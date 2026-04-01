@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'modeltranslation',
+    # "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     'drf_yasg'  ,
     'multiselectfield',
+
 
 ]
 
@@ -136,3 +138,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+# JAZZMIN_SETTINGS = {
+#     "site_title": "Admin",
+#     "site_header": "My Project",
+#     "site_brand": "My Project",
+#     "welcome_sign": "Добро пожаловать, Билал",
+#     "theme": "darkly",
+# }
+# AUTH_USER_MODEL = 'menu.UserProfile'

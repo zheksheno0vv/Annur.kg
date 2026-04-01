@@ -100,3 +100,5 @@ class OpeningHoursAdmin(TranslationAdmin):
         }
 
 admin.site.register(Contact)
+admin.site.register(UserProfile)
+

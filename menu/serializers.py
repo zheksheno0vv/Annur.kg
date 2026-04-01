@@ -1,6 +1,16 @@
 from .models import *
 from rest_framework import serializers
 
+class UserListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+
+class UserDetailSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+
 class RestoranListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Restoran
